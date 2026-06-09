@@ -1,0 +1,17 @@
+[Unit]
+Description=BarsLIst Web Restarter
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/barslist-restarter
+Restart=on-failure
+RestartSec=5
+
+# Разрешаем только эту конкретную команду через sudo, либо запускаем от root
+# Если сервис запущен НЕ от root — добавьте правило в /etc/sudoers:
+#   www-data ALL=(ALL) NOPASSWD: /bin/systemctl restart BarsLIst
+User=root
+
+[Install]
+WantedBy=multi-user.target
